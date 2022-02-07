@@ -3,21 +3,15 @@
 import * as React from 'react';
 import {
   Button,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Form,
-  FormGroup,
-  Input,
-  Label
 } from "reactstrap";
 import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Modal from "./components/Modal";
 import Typography from '@mui/material/Typography';
+import Rating from '@mui/material/Rating';
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import AttachMoneyOutlinedIcon from '@mui/icons-material/AttachMoneyOutlined';
 import axios from "axios";
 
 export default function MainPage() {
@@ -37,6 +31,7 @@ export default function MainPage() {
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
+  
 
   const queryAPI = () => {
     let config = {
@@ -47,12 +42,29 @@ export default function MainPage() {
       },
     }
 
-    setshallowValues({...shallowValues,symbol:values['symbol'],investment:values['investment']})
+    if(values['symbol'] !== '' && values['investment'] !== ''){
 
     axios
       .get("http://localhost:5000/api/v1/project/core/process_request", config)
-      .then(res => setQuery(res.data.message))
-      .catch(err => console.log(err));
+      .then(res => {
+        console.log(res.data.message)
+        if(res.data.message !== 'Symbol doesn\'t exist'){
+          setQuery(res.data.message)
+          setshallowValues({...shallowValues,symbol:values['symbol'],investment:values['investment']})
+        }
+        else{
+          alert('That symbol doesn\'t exist on our target exchange')
+          setValues({ ...values, symbol: '' });
+        }
+        })
+      .catch(err =>{ 
+        console.log(err)
+        alert('That symbol doesn\'t exist on our target exchange')
+      setValues({ ...values, symbol: '',investment:'' });});
+    }
+    else{
+      alert('Please input a symbol and investment amount')
+    }
       
   };
 
@@ -62,6 +74,15 @@ export default function MainPage() {
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }));
+
+  const StyledRating = styled(Rating)({
+    '& .MuiRating-iconFilled': {
+      color: '#ffdc64',
+    },
+    '& .MuiRating-iconHover': {
+      color: '#ffdc64',
+    },
+  });
 
 
 
@@ -77,7 +98,7 @@ export default function MainPage() {
             <div className="card p-3">
 
               <div className="my-5 tab-list" >
-              <TextField id="outlined-basic" label="Crypto Symbol" variant="outlined" onChange={handleChange('symbol')} />
+              <TextField id="outlined-basic" label="Crypto Symbol" variant="outlined" value={values['symbol']} onChange={handleChange('symbol')} />
               </div>
 
               <div className="my-5 tab-list" >
@@ -85,6 +106,7 @@ export default function MainPage() {
           id="outlined-number"
           label="Initial Investment"
           type="number"
+          value={values['investment']}
           onChange={handleChange('investment')}
 
         />
@@ -100,18 +122,19 @@ export default function MainPage() {
           <Grid item xs={6}>
             <Item>
             <Typography variant="body2" color="text.secondary">
-                Number of Coins
+                Number of Coins Initially Bought
               </Typography>
 
+
               <Typography variant="h4" color="text.secondary">
-                {shallowValues['symbol']} : {Query['NUMBERCOINS']}
+                {shallowValues['symbol']} : {Number((Query['NUMBERCOINS']).toFixed(5))}
               </Typography>
             </Item>
           </Grid>
           <Grid item xs={6}>
             <Item>
             <Typography variant="body2" color="text.secondary">
-                Profit
+                 Net Profit (Gross Profit - Investment)
               </Typography>
 
               <Typography variant="h4" color="text.secondary">
@@ -150,6 +173,16 @@ export default function MainPage() {
               <Typography variant="h4" color="text.secondary">
                 {Query['LAMBOS']}
               </Typography>
+
+              <StyledRating
+              style={{paddingTop:'20px'}}
+              size="large"
+        defaultValue={Math.floor(Query['LAMBOS'])}
+        precision={0.5}
+         max={Math.floor(Query['LAMBOS'])}
+         readOnly
+        icon={<AttachMoneyOutlinedIcon fontSize="inherit" />}
+      />
               </Item>
           </Grid>
         </Grid>
