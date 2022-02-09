@@ -104,7 +104,7 @@ export default function MainPage() {
               <div className="my-5 tab-list" >
               <TextField
           id="outlined-number"
-          label="Initial Investment"
+          label="Initial Investment ($)"
           type="number"
           value={values['investment']}
           onChange={handleChange('investment')}

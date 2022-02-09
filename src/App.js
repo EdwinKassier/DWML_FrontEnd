@@ -11,7 +11,6 @@ import {
   Input,
   Label
 } from "reactstrap";
-import Modal from "./components/Modal";
 import axios from "axios";
 
 import Main from './Main';
