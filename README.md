@@ -9,7 +9,7 @@ This is the frontend repo for the system
 
 ## Getting started
 
-1.Before running the application frontend, run the install command ```[yarn install]```
+1.Before running the application frontend, run the install command ```[npm install]``` or ```[yarn install]```
 
 
 ## Run the application
