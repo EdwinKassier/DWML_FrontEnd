@@ -18,9 +18,10 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+
+import Tooltip from "@mui/material/Tooltip";
 
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
@@ -29,6 +30,7 @@ import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import ScienceIcon from "@mui/icons-material/Science";
 import BoltIcon from "@mui/icons-material/Bolt";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
+import TrainIcon from '@mui/icons-material/Train';
 
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
@@ -110,7 +112,9 @@ export default function MainPage() {
         })
         .catch((err) => {
           console.log(err);
-          alert("That symbol doesn't exist on our target exchange or the api is not running");
+          alert(
+            "That symbol doesn't exist on our target exchange or the api is not running"
+          );
           setValues({ ...values, symbol: "", investment: "" });
           setqueryLoading(false);
         });
@@ -153,7 +157,9 @@ export default function MainPage() {
         })
         .catch((err) => {
           console.log(err);
-          alert("That symbol doesn't exist on our target exchange or the api is not running");
+          alert(
+            "That symbol doesn't exist on our target exchange or the api is not running"
+          );
           setValues({ ...values, symbol: "", investment: "" });
           setqueryLoading(false);
         });
@@ -184,7 +190,9 @@ export default function MainPage() {
     borderRadius: 20,
     paddingTop: "20px",
     paddingBottom: "20px",
-    backgroundColor: "white",
+    backgroundColor: "#F2F2F2",
+    borderColor: "black",
+    borderWidth: "20px",
     "&:hover": {
       backgroundColor: "black",
       color: "white",
@@ -205,20 +213,18 @@ export default function MainPage() {
 
   return (
     <main className="content">
-      <AppBar position="static" style={{ backgroundColor: "#181818" }}>
+      <AppBar position="static" style={{ backgroundColor: "#3E4145" }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <Typography
               variant="h6"
               noWrap
-              component="a"
-              href="/"
               sx={{
-                mr: 2,
+                mr: 1,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "monospace",
                 fontWeight: 700,
-                letterSpacing: ".3rem",
+                letterSpacing: ".2rem",
                 color: "inherit",
                 textDecoration: "none",
               }}
@@ -234,33 +240,49 @@ export default function MainPage() {
         </Container>
       </AppBar>
 
-      <Typography
-        variant="h6"
-        color="#202020"
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-          paddingTop: "50px",
-          paddingBottom: "50px",
-        }}
-      >
-        Ever wondered if you could have bought a Lamborghini if you had just
-        invested in that one crypto currency when it was first released?
-      </Typography>
-      <div className="row ">
+      <div className="row" style={{ paddingTop: "20px"}}>
         <div className="col-md-6 col-sm-10 mx-auto p-0">
           <div className="card p-3" style={{ borderRadius: 20 }}>
-            <Box sx={{ flexGrow: 1 }} style={{ paddingBottom: "20px" }}>
-              <Grid
-                container
-                spacing={2}
-                justifyContent="center"
-                alignItems="center"
-              >
+
+          <Box sx={{ flexGrow: 1 }} style={{ paddingBottom: '2.8rem', paddingTop:'1.8rem' }}>
+            <Grid direction="row" container spacing={1}>
+              <Grid container item sm={6} style={{paddingRight:'20px'}}>
                 <Grid item xs={12} justifyContent="center" alignItems="center">
                   <Typography
                     variant="h6"
+                    color="text.secondary"
+                    style={{
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    Ever wondered if you could have bought a Lamborghini if you
+                  had just invested in that one crypto currency when it was
+                  first released?
+                  </Typography>
+                </Grid>
+
+                <Grid item xs={12} justifyContent="center" alignItems="center">
+                  <Typography
+                    variant="h6"
+                    color="text.secondary"
+                    style={{
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                      paddingTop:'40px'
+                    }}
+                  >
+                    Imagine you bought in the first week it launched on an exchange and sold at the average price of the last month
+                  </Typography>
+                </Grid>
+
+              </Grid>
+              <Grid container item sm={6}>
+              <Grid item xs={12} justifyContent="center" alignItems="center">
+                  <Typography
+                    variant="h7"
                     color="text.secondary"
                     style={{
                       justifyContent: "center",
@@ -282,6 +304,7 @@ export default function MainPage() {
                     value={alignment}
                     exclusive
                     onChange={handleAPIChange}
+                    style={{ borderRadius: 40 }}
                   >
                     <ToggleButton value="flask">
                       Flask <ScienceIcon />
@@ -291,6 +314,9 @@ export default function MainPage() {
                     </ToggleButton>
                     <ToggleButton value="fastapi" disabled>
                       FastAPI <BoltIcon />
+                    </ToggleButton>
+                    <ToggleButton value="express" disabled>
+                      Express <TrainIcon />
                     </ToggleButton>
                   </ToggleButtonGroup>
                 </Grid>
@@ -314,6 +340,8 @@ export default function MainPage() {
                   />
                 </Grid>
               </Grid>
+            </Grid>
+
             </Box>
 
             {queryLoading && (
@@ -387,9 +415,14 @@ export default function MainPage() {
                 </Grid>
                 <Grid item xs={12}>
                   <Item>
-                    <Typography variant="body2" color="text.secondary">
-                      Number of Lambos
-                    </Typography>
+                    <Tooltip
+                      title="Assuming your average Lamborghini costs $200000"
+                      arrow
+                    >
+                      <Typography variant="body2" color="text.secondary">
+                        Number of Lambos
+                      </Typography>
+                    </Tooltip>
 
                     <Typography variant="h4" color="text.secondary">
                       {Query["LAMBOS"]}
