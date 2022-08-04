@@ -3,7 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-import MainPage from "./MainPage.js";
+import DWML from "./DWML.js";
+import Home from "./Home.js";
 
 class Main extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class Main extends Component {
     return (
       <div>
         <Routes>
-          <Route path="/" element={<MainPage />}></Route>
+        <Route path="/" element={<Home />}></Route>
+          <Route path="/DWML" element={<DWML />}></Route>
         </Routes>
       </div>
     );

@@ -1,0 +1,17 @@
+{
+    "projects": {
+        "default": "edwin-portfolio-358212"
+    },
+    "targets": {
+        "edwin-portfolio-358212": {
+            "hosting": {
+                "production": [
+                    "edwin-portfolio-358212"
+                ],
+                "development": [
+                    "edwin-portfolio-358212"
+                ]
+            }
+        }
+    }
+}
