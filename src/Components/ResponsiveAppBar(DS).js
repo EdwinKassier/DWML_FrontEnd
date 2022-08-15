@@ -18,7 +18,7 @@ import Menu from '@mui/material/Menu';
 
 export default function MenuAppBar() {
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
   const pages = ['Home'];
 
@@ -45,7 +45,7 @@ export default function MenuAppBar() {
       <AppBar position="static" style={{ backgroundColor: "#3E4145" }}>
         <Toolbar>
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
-        <IconButton
+            <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -55,6 +55,7 @@ export default function MenuAppBar() {
             >
               <ArrowBackIcon />
             </IconButton>
+
           </Box>
           <Typography
               variant="h6"
@@ -69,12 +70,10 @@ export default function MenuAppBar() {
                 textDecoration: "none",
               }}
             >
-          Dude, Where's My{" "}
-              <span style={{ color: "#F7E300", paddingLeft: "10px" }}>
+          Data <span style={{ color: "#3AA061", paddingLeft: "10px" }}>
                 {" "}
-                Lambo{" "}
+                Science{" "}
               </span>
-              ?
           </Typography>
 
 
@@ -91,12 +90,10 @@ export default function MenuAppBar() {
                 textDecoration: "none",
               }}
             >
-          DWM{" "}
-              <span style={{ color: "#F7E300" }}>
+          Data <span style={{ color: "#3AA061", paddingLeft: "10px" }}>
                 {" "}
-                L{" "}
+                Science{" "}
               </span>
-              ?
           </Typography>
 
         </Toolbar>

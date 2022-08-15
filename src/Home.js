@@ -56,13 +56,16 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import axios from "axios";
 
+import toast, { Toaster } from 'react-hot-toast';
+
+
 import ResponsiveAppBar from "./Components/ResponsiveAppBar(Home)";
 
 import LamboImage from "./Assets/DWML.jpg"
 import DSImage from "./Assets/datascience.jpg"
 import DAImage from "./Assets/DataAnalysis.jpg"
 
-export default function Home() {
+export default function Home({ navigation }) {
 
 
 
@@ -124,7 +127,7 @@ export default function Home() {
                 <Card sx={{ minWidth: 345, minHeight:520, borderRadius:10 }} >
                   <CardActionArea sx={{ minWidth: 345, minHeight:540,textDecoration: 'none' }}>
                     <CardMedia
-                      height="350"
+                      height="3rem"
                       component="img" 
                       src={LamboImage}
                       alt="green iguana"
@@ -143,10 +146,11 @@ export default function Home() {
               </Grid>
 
               <Grid container item sm={4}>
+              <Link to={'/DS'} style={{ textDecoration: 'none' }}>
                 <Card sx={{ minWidth: 345, minHeight:520, borderRadius:10 }}>
                   <CardActionArea sx={{ minWidth: 345, minHeight:540 }}>
                     <CardMedia
-                      height="350"
+                      height="3rem"
                       component="img" 
                       src={DSImage}
                       alt="green iguana"
@@ -161,13 +165,15 @@ export default function Home() {
                     </CardContent>
                   </CardActionArea>
                 </Card>
+                </Link>
               </Grid>
 
               <Grid container item sm={4}>
-                <Card sx={{ minWidth: 345, minHeight:520, borderRadius:10 }}>
+                <div onClick={()=>toast('Here is your toast.')}>
+                <Card sx={{ minWidth: 345, minHeight:520, borderRadius:10 }} onClick={(event)=>toast('Here is your toast.')}>
                   <CardActionArea sx={{ minWidth: 345, minHeight:540 }}>
                     <CardMedia
-                      height="350"
+                      height="3rem"
                       component="img" 
                       src={DAImage}
                       alt="green iguana"
@@ -182,6 +188,7 @@ export default function Home() {
                     </CardContent>
                   </CardActionArea>
                 </Card>
+                </div>
               </Grid>
             </Grid>
           </Box>

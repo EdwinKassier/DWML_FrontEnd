@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import DWML from "./DWML.js";
+import DS from "./DS.js";
 import Home from "./Home.js";
 
 class Main extends Component {
@@ -16,6 +17,7 @@ class Main extends Component {
         <Routes>
         <Route path="/" element={<Home />}></Route>
           <Route path="/DWML" element={<DWML />}></Route>
+          <Route path="/DS" element={<DS />}></Route>
         </Routes>
       </div>
     );
